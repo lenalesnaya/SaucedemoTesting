@@ -9,14 +9,12 @@ namespace SaucedemoTests.Steps
     {
         public CheckoutSteps(IWebDriver? driver) : base(driver) { }
 
-        public CheckoutCompletePage StandartDataCheckout(InventoryPage inventoryPage)
-        {
-            return inventoryPage.
+        public CheckoutCompletePage StandartDataCheckout(InventoryPage inventoryPage) =>
+            inventoryPage.
                 ClickAddToCartButton().
                 ClickShoppingCartLink().
                 ClickCheckoutButton().
                 Checkout(CheckoutDataBuilder.StandartCheckoutData).
                 ClickFinishButton();
-        }
     }
 }

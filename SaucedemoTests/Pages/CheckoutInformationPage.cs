@@ -1,21 +1,17 @@
-﻿using Core.BaseEntities;
-using Core.Utilites.Configuration;
+﻿using Core.Utilites.Configuration;
 using Core.Wrappers;
 using OpenQA.Selenium;
 using SaucedemoTests.Models;
-using System.Reflection.Emit;
+using SaucedemoTests.Pages.Abstractions;
 
 namespace SaucedemoTests.Pages
 {
     public class CheckoutInformationPage : SaucedemoPage
     {
-        private static readonly string END_POINT =
-            Configurator.Configuration.GetSection("Endpoints")["CheckoutInformationPage"]!;
-
-        private static readonly By FirstNameInputBy = GetInputLocator("firstName");
-        private static readonly By LastNameInputBy = GetInputLocator("lastName");
-        private static readonly By ZipCodeInputBy = GetInputLocator("postalCode");
-        private static readonly By ContinueButtonBy = GetInputLocator("continue");
+        private static readonly By FirstNameInputBy = By.CssSelector("input[data-test='firstName']");
+        private static readonly By LastNameInputBy = By.CssSelector("input[data-test='lastName']");
+        private static readonly By ZipCodeInputBy = By.CssSelector("input[data-test='postalCode']");
+        private static readonly By ContinueButtonBy = By.CssSelector("input[data-test='continue']");
 
         public UIElement FirstNameInput => new(Driver, FirstNameInputBy);
 
@@ -25,14 +21,12 @@ namespace SaucedemoTests.Pages
 
         public Button ContinueButton => new(Driver, ContinueButtonBy);
 
+        protected override string EndPoint =>
+            Configurator.Configuration.GetSection("Endpoints")["CheckoutInformationPage"]!;
+
         public CheckoutInformationPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl) { }
 
         public CheckoutInformationPage(IWebDriver? driver) : base(driver, false) { }
-
-        protected override void OpenPage()
-        {
-            Driver!.Navigate().GoToUrl(Test.BaseUrl + END_POINT);
-        }
 
         public override bool IsPageOpened()
         {
@@ -76,12 +70,10 @@ namespace SaucedemoTests.Pages
             return new CheckoutOverviewPage(Driver);
         }
 
-        public CheckoutInformationPage TryToCheckout(CheckoutData checkoutData)
-        {
-            return SetFirstName(checkoutData.FirstName).
+        public CheckoutInformationPage TryToCheckout(CheckoutData checkoutData) =>
+            SetFirstName(checkoutData.FirstName).
                 SetLastName(checkoutData.LastName).
                 SetZipCode(checkoutData.ZipCode).
                 ClickContinueButton();
-        }
     }
 }

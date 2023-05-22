@@ -1,15 +1,12 @@
-using Core.BaseEntities;
 using Core.Utilites.Configuration;
 using Core.Wrappers;
 using OpenQA.Selenium;
+using SaucedemoTests.Pages.Abstractions;
 
 namespace SaucedemoTests.Pages
 {
     public class InventoryPage : SaucedemoPage
     {
-        private static readonly string END_POINT =
-            Configurator.Configuration.GetSection("Endpoints")["InventoryPage"]!;
-
         private static readonly By ProductsTitleBy =
             By.XPath("//span[@class='title' and contains(text(),'Product')]");
         private static readonly By ShoppingCartLinkBy = By.ClassName("shopping_cart_link");
@@ -33,14 +30,12 @@ namespace SaucedemoTests.Pages
 
         public Button RemoveButton => new(Driver, RemoveButtonBy);
 
+        protected override string EndPoint =>
+            Configurator.Configuration.GetSection("Endpoints")["InventoryPage"]!;
+
         public InventoryPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl) { }
 
         public InventoryPage(IWebDriver? driver) : base(driver, false) { }
-
-        protected override void OpenPage()
-        {
-            Driver!.Navigate().GoToUrl(Test.BaseUrl + END_POINT);
-        }
 
         public override bool IsPageOpened()
         {
@@ -68,11 +63,12 @@ namespace SaucedemoTests.Pages
 
         public bool CheckRemoveButtonPresented() => RemoveButton.Displayed;
 
-
         public bool CheckShoppingCartBadgeIsCorrect(int quantityOfProducts)
         {
             if (!ShoppingCartBadge.Displayed)
+            {
                 return false;
+            }
 
             return ShoppingCartBadge.Text == quantityOfProducts.ToString();
         }

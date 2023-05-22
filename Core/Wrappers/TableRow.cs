@@ -5,7 +5,7 @@ namespace Core.Wrappers
     public class TableRow
     {
         private UIElement _uiElement;
-        
+
         public TableRow(IWebDriver? driver, By @by)
         {
             _uiElement = new UIElement(driver, @by);

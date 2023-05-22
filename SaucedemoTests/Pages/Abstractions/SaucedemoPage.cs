@@ -2,13 +2,12 @@
 using Core.Wrappers;
 using OpenQA.Selenium;
 
-namespace SaucedemoTests.Pages
+namespace SaucedemoTests.Pages.Abstractions
 {
     public abstract class SaucedemoPage : Page
     {
-        protected const string InputLocatorTemplate = "input[data-test='{0}']";
-
         protected static readonly By ErrorMessageBy = By.CssSelector("h3[data-test='error']");
+        protected abstract string EndPoint { get; }
 
         public UIElement ErrorMessage => new(Driver, ErrorMessageBy);
 
@@ -16,11 +15,11 @@ namespace SaucedemoTests.Pages
 
         public SaucedemoPage(IWebDriver? driver) : base(driver, false) { }
 
+        protected override void OpenPage() =>
+            Driver!.Navigate().GoToUrl(Test.BaseUrl + EndPoint);
+
         public bool CheckErrorMassagePresented() => ErrorMessage.Displayed;
 
         public bool CheckErrorMassageIsCorrect(string message) => ErrorMessage.Text.Equals(message);
-
-        protected static By GetInputLocator(string inputLocator) =>
-            By.CssSelector(string.Format(InputLocatorTemplate, inputLocator));
     }
 }

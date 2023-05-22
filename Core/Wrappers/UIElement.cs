@@ -30,65 +30,41 @@ namespace Core.Wrappers
             _actions = new Actions(webDriver);
         }
         
-        public IWebElement FindElement(By @by)
-        {
-            return _webElementImplementation.FindElement(@by);
-        }
+        public IWebElement FindElement(By @by) =>
+            _webElementImplementation.FindElement(@by);
 
-        public ReadOnlyCollection<IWebElement> FindElements(By @by)
-        {
-            return _webElementImplementation.FindElements(@by);
-        }
+        public ReadOnlyCollection<IWebElement> FindElements(By @by) =>
+            _webElementImplementation.FindElements(@by);
 
-        public void Clear()
-        {
+        public void Clear() =>
             _webElementImplementation.Clear();
-        }
 
-        public void SendKeys(string text)
-        {
+        public void SendKeys(string text) =>
             _webElementImplementation.SendKeys(text);
-        }
 
-        public void Submit()
-        {
+        public void Submit() =>
             _webElementImplementation.Submit();
-        }
 
-        public void Click()
-        {
+        public void Click() =>
             _webElementImplementation.Click();
-        }
 
-        public string GetAttribute(string attributeName)
-        {
-            return _webElementImplementation.GetAttribute(attributeName);
-        }
+        public string GetAttribute(string attributeName) =>
+            _webElementImplementation.GetAttribute(attributeName);
 
-        public string GetDomAttribute(string attributeName)
-        {
+        public string GetDomAttribute(string attributeName) =>
             throw new NotImplementedException();
-        }
 
-        public string GetDomProperty(string propertyName)
-        {
-            return _webElementImplementation.GetDomProperty(propertyName);
-        }
-        
-        public string GetCssValue(string propertyName)
-        {
-            return _webElementImplementation.GetCssValue(propertyName);
-        }
+        public string GetDomProperty(string propertyName) =>
+            _webElementImplementation.GetDomProperty(propertyName);
 
-        public ISearchContext GetShadowRoot()
-        {
+        public string GetCssValue(string propertyName) =>
+            _webElementImplementation.GetCssValue(propertyName);
+
+        public ISearchContext GetShadowRoot() =>
             throw new NotImplementedException();
-        }
 
-        public void Hover()
-        {
+        public void Hover() =>
             _actions.MoveToElement(_webElementImplementation).Build().Perform();
-        }
 
         public string TagName => _webElementImplementation.TagName;
 

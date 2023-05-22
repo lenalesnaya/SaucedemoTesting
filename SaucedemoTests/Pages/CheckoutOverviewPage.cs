@@ -2,26 +2,22 @@
 using Core.Utilites.Configuration;
 using Core.Wrappers;
 using OpenQA.Selenium;
+using SaucedemoTests.Pages.Abstractions;
 
 namespace SaucedemoTests.Pages
 {
     public class CheckoutOverviewPage : SaucedemoPage
     {
-        private static readonly string END_POINT =
-            Configurator.Configuration.GetSection("Endpoints")["CheckoutOverviewPage"]!;
-
         private static readonly By FinishButtonBy = By.CssSelector("button[data-test='finish']");
 
         public Button FinishButton => new(Driver, FinishButtonBy);
 
+        protected override string EndPoint =>
+            Configurator.Configuration.GetSection("Endpoints")["CheckoutOverviewPage"]!;
+
         public CheckoutOverviewPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl) { }
 
         public CheckoutOverviewPage(IWebDriver? driver) : base(driver, false) { }
-
-        protected override void OpenPage()
-        {
-            Driver!.Navigate().GoToUrl(Test.BaseUrl + END_POINT);
-        }
 
         public override bool IsPageOpened()
         {

@@ -47,7 +47,6 @@ namespace SaucedemoTests.Tests
         public void CheckoutAnInventoryItem_WithValidCheckoutData()
         {
             var checkoutCompletePage = new CheckoutSteps(Driver).StandartDataCheckout(_inventoryPage);
-
             Assert.Multiple(() =>
             {
                 Assert.That(checkoutCompletePage.IsPageOpened());

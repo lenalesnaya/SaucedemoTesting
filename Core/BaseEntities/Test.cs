@@ -4,17 +4,12 @@ using OpenQA.Selenium;
 
 namespace Core.BaseEntities
 {
-    public class Test
+    public abstract class Test
     {
         public static readonly string? BaseUrl = Configurator.AppSettings.URL;
 
         [ThreadStatic] protected static IWebDriver? Driver;
         protected WaitService? WaitService;
-
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
-        {
-        }
 
         [SetUp]
         public void Setup()

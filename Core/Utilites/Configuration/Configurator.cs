@@ -49,6 +49,7 @@ namespace Core.Utilites.Configuration
             {
                 List<User?> users = new();
                 var child = Configuration.GetSection("Users");
+
                 foreach (var section in child.GetChildren())
                 {
                     var user = new User

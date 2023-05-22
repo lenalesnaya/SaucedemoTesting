@@ -36,7 +36,6 @@ namespace SaucedemoTests.Tests
         public void Login_WithLockedOutUserCredentials(User user)
         {
             var loginPage = new LoginPage(Driver, true).TryToLogin(user);
-
             Assert.Multiple(() =>
             {
                 Assert.That(loginPage.CheckErrorMassagePresented());
@@ -51,7 +50,6 @@ namespace SaucedemoTests.Tests
         public void Login_WithInvalidCredentials(User user)
         {
             var loginPage = new LoginPage(Driver, true).TryToLogin(user);
-
             Assert.Multiple(() =>
             {
                 Assert.That(loginPage.CheckErrorMassagePresented());

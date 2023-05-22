@@ -1,20 +1,16 @@
-using Core.BaseEntities;
 using Core.Models;
 using Core.Utilites.Configuration;
 using Core.Wrappers;
 using OpenQA.Selenium;
+using SaucedemoTests.Pages.Abstractions;
 
 namespace SaucedemoTests.Pages
 {
     public class LoginPage : SaucedemoPage
     {
-        private static readonly string END_POINT =
-            Configurator.Configuration.GetSection("Endpoints")["LoginPage"]!;
-
-        private static readonly By UserNameInputBy = GetInputLocator("username");
-        private static readonly By PasswordInputBy = GetInputLocator("password");
-        private static readonly By LoginButtonBy = GetInputLocator("login-button");
-
+        private static readonly By UserNameInputBy = By.CssSelector("input[data-test='username']");
+        private static readonly By PasswordInputBy = By.CssSelector("input[data-test='password']");
+        private static readonly By LoginButtonBy = By.CssSelector("input[data-test='login-button']");
 
         public const string LockedOutUserErrorMessage =
             "Epic sadface: Sorry, this user has been locked out.";
@@ -27,14 +23,12 @@ namespace SaucedemoTests.Pages
 
         public Button LoginButton => new(Driver, LoginButtonBy);
 
+        protected override string EndPoint =>
+            Configurator.Configuration.GetSection("Endpoints")["LoginPage"]!;
+
         public LoginPage(IWebDriver? driver, bool openPageByUrl) : base(driver, openPageByUrl) { }
 
         public LoginPage(IWebDriver? driver) : base(driver, false) { }
-
-        protected override void OpenPage()
-        {
-            Driver!.Navigate().GoToUrl(Test.BaseUrl + END_POINT);
-        }
 
         public override bool IsPageOpened()
         {
@@ -72,9 +66,9 @@ namespace SaucedemoTests.Pages
             return new InventoryPage(Driver);
         }
 
-        public LoginPage TryToLogin(User user)
-        {
-            return SetUserName(user.Username).SetPassword(user.Password).ClickLoginButton();
-        }
+        public LoginPage TryToLogin(User user) =>
+            SetUserName(user.Username).
+                SetPassword(user.Password).
+                ClickLoginButton();
     }
 }
