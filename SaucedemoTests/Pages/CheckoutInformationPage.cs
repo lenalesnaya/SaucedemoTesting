@@ -67,6 +67,8 @@ namespace SaucedemoTests.Pages
         public CheckoutOverviewPage Checkout(CheckoutData checkoutData)
         {
             TryToCheckout(checkoutData);
+            _logger.Info($"Go to {nameof(CheckoutOverviewPage)}");
+
             return new CheckoutOverviewPage(Driver);
         }
 
@@ -75,5 +77,8 @@ namespace SaucedemoTests.Pages
                 SetLastName(checkoutData.LastName).
                 SetZipCode(checkoutData.ZipCode).
                 ClickContinueButton();
+
+        public override string ToString() =>
+            nameof(CheckoutInformationPage);
     }
 }

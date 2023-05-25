@@ -39,6 +39,8 @@ namespace SaucedemoTests.Pages
         public InventoryPage ClickBackHomeButton()
         {
             BackHomeButton.Click();
+            _logger.Info($"Go to {nameof(InventoryPage)}");
+
             return new InventoryPage(Driver);
         }
 
@@ -46,5 +48,8 @@ namespace SaucedemoTests.Pages
 
         public bool CheckConfirmationMassageIsCorrect(string message) =>
             CompleteHeader.Text.Equals(message);
+
+        public override string ToString() =>
+            nameof(CheckoutCompletePage);
     }
 }

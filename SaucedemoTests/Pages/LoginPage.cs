@@ -63,6 +63,8 @@ namespace SaucedemoTests.Pages
         public InventoryPage Login(User user)
         {
             TryToLogin(user);
+            _logger.Info($"Go to {nameof(InventoryPage)}");
+
             return new InventoryPage(Driver);
         }
 
@@ -70,5 +72,8 @@ namespace SaucedemoTests.Pages
             SetUserName(user.Username).
                 SetPassword(user.Password).
                 ClickLoginButton();
+
+        public override string ToString() =>
+            nameof(LoginPage);
     }
 }

@@ -46,7 +46,12 @@ namespace SaucedemoTests.Pages
         public CheckoutInformationPage ClickCheckoutButton()
         {
             CheckoutButton.Click();
+            _logger.Info($"Go to {nameof(CheckoutInformationPage)}");
+
             return new CheckoutInformationPage(Driver);
         }
+
+        public override string ToString() =>
+            nameof(ShoppingCartPage);
     }
 }

@@ -1,10 +1,11 @@
-﻿using Core.BaseEntities;
+﻿using Allure.Commons;
+using Core.BaseEntities;
+using NUnit.Allure.Attributes;
 using SaucedemoTests.Pages;
 using SaucedemoTests.Steps;
 
 namespace SaucedemoTests.Tests
 {
-    [Parallelizable(ParallelScope.All)]
     [TestFixture]
     internal class InventoryCheckoutTests : Test
     {
@@ -17,6 +18,14 @@ namespace SaucedemoTests.Tests
         }
 
         [Test, Category("Positive"), Description("After adding to cart inventory page check.")]
+        [AllureSeverity(SeverityLevel.normal)]
+        [AllureOwner("StandartUser")]
+        [AllureSuite("InventoryCheckoutTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [SmokeTest]
         public void AddToCart_InventoryPageCheck()
         {
@@ -29,6 +38,14 @@ namespace SaucedemoTests.Tests
         }
 
         [Test, Category("Positive"), Description("After adding to cart shopping cart page check.")]
+        [AllureSeverity(SeverityLevel.blocker)]
+        [AllureOwner("StandartUser")]
+        [AllureSuite("InventoryCheckoutTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [SmokeTest]
         public void AddToCart_ShoppingCartCheck()
         {
@@ -42,7 +59,15 @@ namespace SaucedemoTests.Tests
             });
         }
 
-        [Test, Category("Positive"), Description("Checkout of an inventory item check.")]
+        [Test, Category("Positive"), Description("Checkout of an inventory item check with standart valid checkout data.")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureOwner("StandartUser")]
+        [AllureSuite("InventoryCheckoutTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [SmokeTest]
         public void CheckoutAnInventoryItem_WithValidCheckoutData()
         {

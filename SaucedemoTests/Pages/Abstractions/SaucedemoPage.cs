@@ -15,8 +15,11 @@ namespace SaucedemoTests.Pages.Abstractions
 
         public SaucedemoPage(IWebDriver? driver) : base(driver, false) { }
 
-        protected override void OpenPage() =>
+        protected override void OpenPage()
+        {
             Driver!.Navigate().GoToUrl(Test.BaseUrl + EndPoint);
+            _logger.Info($"Go to {this}");
+        }
 
         public bool CheckErrorMassagePresented() => ErrorMessage.Displayed;
 

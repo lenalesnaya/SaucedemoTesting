@@ -58,6 +58,8 @@ namespace SaucedemoTests.Pages
         public ShoppingCartPage ClickShoppingCartLink()
         {
             ShoppingCartLink.Click();
+            _logger.Info($"Go to {nameof(ShoppingCartPage)}");
+
             return new ShoppingCartPage(Driver);
         }
 
@@ -72,5 +74,8 @@ namespace SaucedemoTests.Pages
 
             return ShoppingCartBadge.Text == quantityOfProducts.ToString();
         }
+
+        public override string ToString() =>
+            nameof(InventoryPage);
     }
 }

@@ -1,5 +1,4 @@
-﻿using Core.BaseEntities;
-using Core.Utilites.Configuration;
+﻿using Core.Utilites.Configuration;
 using Core.Wrappers;
 using OpenQA.Selenium;
 using SaucedemoTests.Pages.Abstractions;
@@ -34,7 +33,12 @@ namespace SaucedemoTests.Pages
         public CheckoutCompletePage ClickFinishButton()
         {
             FinishButton.Click();
+            _logger.Info($"Go to {nameof(CheckoutCompletePage)}");
+
             return new CheckoutCompletePage(Driver);
         }
+
+        public override string ToString() =>
+            nameof(CheckoutOverviewPage);
     }
 }

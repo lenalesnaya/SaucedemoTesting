@@ -1,15 +1,24 @@
+using Allure.Commons;
 using Core.BaseEntities;
 using Core.Models;
+using NUnit.Allure.Attributes;
 using SaucedemoTests.Pages;
 using SaucedemoTests.TestValues;
 
 namespace SaucedemoTests.Tests
 {
-    [Parallelizable(ParallelScope.All)]
     [TestFixture]
     public class LoginTests : Test
     {
         [Test, Category("Positive"), Description("Go to login page check.")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureOwner("Any user")]
+        [AllureSuite("LoginTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [SmokeTest]
         public void GoTo_LoginPage()
         {
@@ -18,6 +27,14 @@ namespace SaucedemoTests.Tests
         }
 
         [Test, Category("Positive"), Description("Login with valid user credentials check.")]
+        [AllureSeverity(SeverityLevel.critical)]
+        [AllureOwner("ValidUsers")]
+        [AllureSuite("LoginTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [TestCaseSource(typeof(LoginValidValues), nameof(LoginValidValues.TestCases))]
         [SmokeTest]
         public void Login_WithValidUserCredentials(User user)
@@ -31,6 +48,14 @@ namespace SaucedemoTests.Tests
         }
 
         [Test, Category("Negative"), Description("Login with locked out user credentials check.")]
+        [AllureSeverity(SeverityLevel.normal)]
+        [AllureOwner("LockedOutUser")]
+        [AllureSuite("LoginTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [TestCaseSource(typeof(LoginLockedOutUserValues), nameof(LoginLockedOutUserValues.TestCases))]
         [Regression]
         public void Login_WithLockedOutUserCredentials(User user)
@@ -45,6 +70,14 @@ namespace SaucedemoTests.Tests
         }
 
         [Test, Category("Negative"), Description("Login with invalid credentials check.")]
+        [AllureSeverity(SeverityLevel.normal)]
+        [AllureOwner("NonExistentRandomUser")]
+        [AllureSuite("LoginTests")]
+        [AllureSubSuite("GUI")]
+        [AllureIssue("not yet available")]
+        [AllureTms("not yet available")]
+        //[AllureTag("Smoke")]
+        //[AllureLink("")]
         [TestCaseSource(typeof(LoginNonExistentUserValues), nameof(LoginNonExistentUserValues.TestCases))]
         [Regression]
         public void Login_WithInvalidCredentials(User user)
